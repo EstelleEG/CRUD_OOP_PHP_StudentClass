@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('Database.php');
 
     class Student {
@@ -43,7 +43,7 @@ require('Database.php');
         }
 
 
-        //ADD DATAS INSERT
+        //CREATE
         public function insert(){
             try{
                 $pdo = Database::getConnection();
@@ -67,47 +67,58 @@ require('Database.php');
             }
         }
 
-
+        //READ ALL
         public function fetchAll(){
             $pdo = Database::getConnection();
             $query = 'SELECT * FROM Student';
             $preparedQuery = $pdo->prepare($query);
             $preparedQuery->execute();
+            //echo "Datas all fetched successfully";
+            //header("Location: ./form.php");
             return $preparedQuery->fetchAll();
-            echo "Data fetched successfully";
-            header("Location: ./form.php");
         }
 
-
+        //READ ONE
         public function fetchOne(){
             $pdo = Database::getConnection();
             $query = 'SELECT * FROM Student WHERE id = ?';
             $preparedQuery = $pdo->prepare($query);
-            $preparedQuery->execute();
+            // $preparedQuery->bindParam(':id',$this->id);
+            $preparedQuery->execute([$this->id]);
+            //echo "Data fetched successfully";
+            //header("Location: ./form.php");
             return $preparedQuery->fetchAll();
-            echo "Data fetched successfully";
-            header("Location: ./form.php");
-
         }
+        
 
 
-        //UPDATE DATAS IN THE DB
+        //UPDATE 
         public function update(){
             $pdo = Database::getConnection();
-            //$query = "UPDATE Student SET nom = :nomUpdated WHERE nom = :nom"; //sql query
-            $query = "UPDATE Student SET id = :id WHERE WHERE id = :id"; 
+            $query = "UPDATE Student SET nom = :nom, prenom = :prenom WHERE id = :id"; 
             $preparedQuery = $pdo->prepare($query);
             $preparedQuery->bindParam(':id', $this->id);
             $preparedQuery->bindParam(':nom',$this->nom);
+            $preparedQuery->bindParam(':prenom',$this->prenom);
             $preparedQuery->execute();
             echo "Data updated successfully";
             header("Location: ./form.php");
         }
 
 
+        //UPDATE 
+        // public function update(){
+        //     $pdo = Database::getConnection();
+        //     $query = "UPDATE Student SET nom = ?, prenom = ? WHERE id = ? "; 
+        //     $preparedQuery = $pdo->prepare($query);
+        //     $preparedQuery->execute([$this->nom, $this->prenom, $this->id]);
+        //     echo "Data updated successfully";
+        //     header("Location: ./form.php");
+        // }
+
+        //DELETE
         public function delete(){
             $pdo = Database::getConnection();
-            //$query = "DELETE FROM Student WHERE nom = :nom"; 
             $query = "DELETE FROM Student WHERE id = :id"; 
             $preparedQuery = $pdo->prepare($query);
             $preparedQuery->bindParam(':id', $this->id);
@@ -116,8 +127,4 @@ require('Database.php');
             //header("Location: ./form.php");
     
         }
-
-
-
-
-    }
+}

@@ -1,5 +1,4 @@
 <?php
-
 require('./Student.php');
 
 $data = new Student(0, '', '');
@@ -19,7 +18,7 @@ $all = $data->fetchAll();
 </head>
 <body>
     <h2>List of all Students</h2>
-    <a class='btn btn-success' href="signupForm.php">Add new</a>
+    <a class='btn btn-success' href="signupForm.php">ADD</a>
 
     <table class='table'>
         <tr>
@@ -31,11 +30,12 @@ $all = $data->fetchAll();
         foreach($all as $key => $value){
             //var_dump($value);
     ?>
-    
+
         <tr>
             <td><?=$value['nom']?></td>
             <td><?=$value['prenom']?></td>
             
+            <td><a class='btn btn-info' href="read.php?id=<?=$value['id']?>">READ</a></td>
             <td><a class='btn btn-danger' href="delete.php?id=<?=$value['id']?>&req=delete">DELETE</a></td>
             <td><a class='btn btn-warning' href="edit.php?id=<?=$value['id']?>">UPDATE</a></td>
         </tr>

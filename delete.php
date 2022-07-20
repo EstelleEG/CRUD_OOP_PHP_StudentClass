@@ -1,6 +1,6 @@
 <?php
-require('./Student.php');
-//TO DELETE WITH BUTTON DELETE 
+require('Student.php');
+//CRUD VIA BUTTON
 
 $student = new Student(0, '', '');
 

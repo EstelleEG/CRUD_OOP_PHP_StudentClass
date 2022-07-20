@@ -9,7 +9,6 @@
 </head>
 <body>
     <h3>Fill out your information</h3>
-
     <div>
         <form action="signupProcess.php" method="post">
             <label for="Nom"></label>
@@ -29,7 +28,6 @@
             />
 
             <input type="submit" value='save' name='save'/>
-
         </form>
     </div>
 </body>

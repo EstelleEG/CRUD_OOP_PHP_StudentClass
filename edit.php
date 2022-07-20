@@ -1,23 +1,23 @@
 <?php
-require('./Student.php');
+//CRUD VIA BUTTON
 
-$data = new Student(0, '', '');
+require('Student.php');
+
+$data = new Student($_GET['id'], '', '');
 $id = $_GET['id'];
 $data->setId($id);
 
 if(isset($_POST['edit'])){
     $data->setNom($_POST['nom']);
     $data->setPrenom($_POST['prenom']);
-
     echo $data->update();
     //echo "<script>alert("Data has been updated successfully");document.location='form.php'</script>";
 }
 
-// $student = $data->fetchOne();
-// $value=$student[0];
+$queryResult = $data->fetchOne();
+$student = $queryResult[0];
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,18 +38,16 @@ if(isset($_POST['edit'])){
             type="text"
             id = 'nom'
             name='nom'
-            value="<?php echo $value['nom'];?>"
-            />
+            value="<?php echo $student['nom'];?>"/>
 
             <label for="Prenom"></label>
             <input 
             type="text"
             id = 'prenom'
             name='prenom'
-            value="<?php echo $value['prenom'];?>"
-            />
+            value="<?php echo $student['prenom'];?>"/>
 
-            <input type="submit" value="update" name="edit"/>
+            <input type="submit" value="UPDATE" name="edit"/>
 
         </form>
     </div>
